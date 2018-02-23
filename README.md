@@ -37,7 +37,7 @@ For up-to-date installation instructions, along with troubleshooting steps, plea
 
 Support
 -------
-For further information on using Tracker, please refer to our [online documentation](http://support.webshopapps.com/shippingtracker).
+For further information on using Tracker, please refer to our [online documentation](http://wiki.webshopapps.com/extensions/generic-tracker).
 If you have any issues with this extension, open an issue on [GitHub](https://github.com/shipperhq/module-shipping-tracker/issues).
 
 Contribution
