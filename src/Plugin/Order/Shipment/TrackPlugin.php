@@ -35,13 +35,14 @@
 
 namespace ShipperHQ\Tracker\Plugin\Order\Shipment;
 
+class TrackPlugin
+{
 
-class TrackPlugin {
-
-    public function afterGetNumberDetail(\Magento\Shipping\Model\Order\Track $trackObj, $result) {
+    public function afterGetNumberDetail(\Magento\Shipping\Model\Order\Track $trackObj, $result)
+    {
 
         // check its the tracker carrier
-        if (strpos($this->getCarrierCode(),'tracker')!== false && 
+        if (strpos($this->getCarrierCode(), 'tracker')!== false &&
             strpos($result, 'No detail for number') !== false) {
             // didn't find tracking details, lets see if we can get from our extn
             $carrierInstance = $this->_carrierFactory->create($this->getCarrierCode());
@@ -54,20 +55,17 @@ class TrackPlugin {
                 $carrierInstance->setStore($this->getStore());
             }
 
-            $rplChars = array(" " => '');
+            $rplChars = [" " => ''];
             $string = $this->getShipment()->getShippingAddress()->getPostcode();
-            $postcode = strtr($string,$rplChars);
+            $postcode = strtr($string, $rplChars);
             
             $trackingInfo = $carrierInstance->getTrackingInfo($this->getNumber(), $postcode);
             if (!$trackingInfo) {
-
-                return Mage::helper('sales')->__('No detail for number "%s"', $this->getNumber());
+                return __('No detail for number "%s"', $this->getNumber());
             }
 
             return $trackingInfo;
         }
         return $result;
-
     }
-
 }

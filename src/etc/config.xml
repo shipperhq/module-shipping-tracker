@@ -36,13 +36,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <carriers>
-            <tracker1>
+            <shqtracker1>
                 <active>0</active>
                 <name>Tracker1</name>
                 <sallowspecific>0</sallowspecific>
                 <model>ShipperHQ\Tracker\Model\Carrier\Tracker1</model>
                 <title>ShipperHQ Tracker 1</title>
-            </tracker1>
+            </shqtracker1>
         </carriers>
         <extension_version>0.0.0</extension_version>
     </default>

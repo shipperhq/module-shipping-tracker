@@ -40,7 +40,7 @@ use Magento\Store\Model\StoreManagerInterface;
 /**
  * Tracker data helper
  */
-class Data extends  \Magento\Framework\App\Helper\AbstractHelper
+class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     
     /**
@@ -51,11 +51,9 @@ class Data extends  \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getConfigValue($configField)
     {
-        return $this->scopeConfig->getValue($configField,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-
+        return $this->scopeConfig->getValue(
+            $configField,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
-
-
-
 }

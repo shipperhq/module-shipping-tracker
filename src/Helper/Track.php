@@ -41,13 +41,13 @@ namespace ShipperHQ\Tracker\Helper;
  *
  * @package ShipperHQ\Tracker\Helper
  */
-class Track extends  \Magento\Framework\App\Helper\AbstractHelper
+class Track extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
     /**
      * @var \Magento\Shipping\Model\Config
      */
-    protected $_shippingConfig;
+    private $shippingConfig;
 
     /**
      * @param \Magento\Shipping\Model\Config $shippingConfig
@@ -55,7 +55,7 @@ class Track extends  \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         \Magento\Shipping\Model\Config $shippingConfig
     ) {
-        $this->_shippingConfig = $shippingConfig;
+        $this->shippingConfig = $shippingConfig;
     }
 
     public function getTrackUrl($title, $trackref = null, $postcode = null)
@@ -66,7 +66,7 @@ class Track extends  \Magento\Framework\App\Helper\AbstractHelper
 
         $fullUrl = "";
 
-        $carrierInstances = $this->_shippingConfig->getAllCarriers();
+        $carrierInstances = $this->shippingConfig->getAllCarriers();
 
         foreach ($carrierInstances as $code => $carrier) {
             if ($carrier->isTrackingAvailable()) {
@@ -78,12 +78,12 @@ class Track extends  \Magento\Framework\App\Helper\AbstractHelper
                     } else {
                         $taggedUrl = $manualUrl;
                     }
-                    if (strpos($taggedUrl, '#SPECIAL#')) {
+                    if (strpos($taggedUrl, '#SPECIAL#')!== false) {
                         $taggedUrl = str_replace("#SPECIAL#", "", $taggedUrl);
                         $fullUrl = str_replace("#TRACKNUM#", "", $taggedUrl);
                     } else {
                         $fullUrl = str_replace("#TRACKNUM#", $trackref, $taggedUrl);
-                        if ($postcode && strpos($taggedUrl, '#POSTCODE#')) {
+                        if ($postcode && strpos($taggedUrl, '#POSTCODE#') !== false) {
                             $fullUrl = str_replace("#POSTCODE#", $postcode, $fullUrl);
                         }
                     }
@@ -95,5 +95,4 @@ class Track extends  \Magento\Framework\App\Helper\AbstractHelper
 
         return $fullUrl;
     }
-
 }

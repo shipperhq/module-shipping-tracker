@@ -38,14 +38,14 @@ class Preurl implements \Magento\Framework\Option\ArrayInterface
     /**
      * @var \ShipperHQ\Tracker\Model\Carrier\Tracker1
      */
-    protected $_carrierTracker;
+    private $carrierTracker;
 
     /**
      * @param \ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1
      */
     public function __construct(\ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1)
     {
-        $this->_carrierTracker = $carrierTracker1;
+        $this->carrierTracker = $carrierTracker1;
     }
 
     /**
@@ -54,7 +54,7 @@ class Preurl implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         $arr = [];
-        foreach ($this->_carrierTracker->getCode('preurl') as $k => $v) {
+        foreach ($this->carrierTracker->getCode('preurl') as $k => $v) {
             $arr[] = ['value' => $k, 'label' => $v];
         }
         return $arr;
