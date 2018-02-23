@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_shipment = $block->getShipment() ?>
+<?php $_order = $block->getOrder() ?>
+<?php
+$rplChars = array(" " => '');
+$string = "";
+if ($this->getOrder()) {
+    $string = $this->getOrder()->getShippingAddress()->getPostcode();
+}
+$zipcode = strtr($string,$rplChars);?>
+<?php if ($_shipment && $_order && $_shipment->getAllTracks()): ?>
+    <br />
+    <table class="shipment-track">
+        <thead>
+        <tr>
+            <th><?= /* @escapeNotVerified */  __('Shipped1 By') ?></th>
+            <th><?= /* @escapeNotVerified */  __('Tracking1 Number') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($_shipment->getAllTracks() as $_item): ?>
+            <tr>
+                <td><?= $block->escapeHtml($_item->getTitle()) ?>:</td>
+                <?php $_url=$this->helper('WebShopApps\Tracker\Helper\Track')->getTrackUrl($_item->getTitle(),$_item->getNumber(), $zipcode) ?>
+
+                <?php if ($_url!=""): ?>
+                    <td><a href="<?php echo $_url ?>" ><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
+                <?php else: ?>
+                    <td><?= $block->escapeHtml($_item->getNumber()) ?></td>
+                <?php endif; ?>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+<?php endif; ?>
