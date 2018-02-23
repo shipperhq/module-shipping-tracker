@@ -1,6 +1,6 @@
 <?php
 /**
- * WebShopApps
+ * ShipperHQ
  *
  * NOTICE OF LICENSE
  *
@@ -18,32 +18,32 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * WebShopApps MatrixRate
+ * ShipperHQ Tracker
  *
- * @category WebShopApps
- * @package WebShopApps_MatrixRate
- * @copyright Copyright (c) 2014 Zowta LLC (http://www.WebShopApps.com)
+ * @category ShipperHQ
+ * @package ShipperHQ_Tracker
+ * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @author WebShopApps Team sales@webshopapps.com
+ * @author ShipperHQ Team sales@shipperhq.com
  *
  */
 /**
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace WebShopApps\Tracker\Model\Config\Source;
+namespace ShipperHQ\Tracker\Model\Config\Source;
 
 class Preurl implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \WebShopApps\Tracker\Model\Carrier\Tracker1
+     * @var \ShipperHQ\Tracker\Model\Carrier\Tracker1
      */
     protected $_carrierTracker;
 
     /**
-     * @param \WebShopApps\Tracker\Model\Carrier\Tracker1 $carrierTracker1
+     * @param \ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1
      */
-    public function __construct(\WebShopApps\Tracker\Model\Carrier\Tracker1 $carrierTracker1)
+    public function __construct(\ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1)
     {
         $this->_carrierTracker = $carrierTracker1;
     }

@@ -29,7 +29,7 @@ $zipcode = strtr($string,$rplChars);?>
         <?php foreach ($_shipment->getAllTracks() as $_item): ?>
             <tr>
                 <td><?= $block->escapeHtml($_item->getTitle()) ?>:</td>
-                <?php $_url=$this->helper('WebShopApps\Tracker\Helper\Track')->getTrackUrl($_item->getTitle(),$_item->getNumber(), $zipcode) ?>
+                <?php $_url=$this->helper('ShipperHQ\Tracker\Helper\Track')->getTrackUrl($_item->getTitle(),$_item->getNumber(), $zipcode) ?>
 
                 <?php if ($_url!=""): ?>
                     <td><a href="<?php echo $_url ?>" ><?= $block->escapeHtml($_item->getNumber()) ?></a></td>

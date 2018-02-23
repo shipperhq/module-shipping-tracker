@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * WebShopApps
+ * ShipperHQ
  *
  * NOTICE OF LICENSE
  *
@@ -19,13 +19,13 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * WebShopApps Tracker
+ * ShipperHQ Tracker
  *
- * @category WebShopApps
- * @package WebShopApps_Tracker
- * @copyright Copyright (c) 2016 Zowta LLC (http://www.WebShopApps.com)
+ * @category ShipperHQ
+ * @package ShipperHQ_Tracker
+ * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @author WebShopApps Team sales@webshopapps.com
+ * @author ShipperHQ Team sales@shipperhq.com
  *
  */
 /**
@@ -40,8 +40,8 @@
                 <active>0</active>
                 <name>Tracker1</name>
                 <sallowspecific>0</sallowspecific>
-                <model>WebShopApps\Tracker\Model\Carrier\Tracker1</model>
-                <title>WebShopApps Tracker 1</title>
+                <model>ShipperHQ\Tracker\Model\Carrier\Tracker1</model>
+                <title>ShipperHQ Tracker 1</title>
             </tracker1>
         </carriers>
         <extension_version>0.0.0</extension_version>

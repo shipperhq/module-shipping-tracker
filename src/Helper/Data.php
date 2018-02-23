@@ -1,7 +1,6 @@
 <?php
 /**
- *
- * ShipperHQ Shipping Module
+ * ShipperHQ
  *
  * NOTICE OF LICENSE
  *
@@ -19,20 +18,21 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * Shipper HQ Shipping
+ * ShipperHQ Tracker
  *
  * @category ShipperHQ
- * @package ShipperHQ_Shipping_Carrier
- * @copyright Copyright (c) 2015 Zowta LLC (http://www.ShipperHQ.com)
+ * @package ShipperHQ_Tracker
+ * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @author ShipperHQ Team sales@shipperhq.com
+ *
  */
 /**
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace WebShopApps\Tracker\Helper;
+namespace ShipperHQ\Tracker\Helper;
 
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;

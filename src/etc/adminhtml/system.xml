@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * WebShopApps
+ * ShipperHQ
  *
  * NOTICE OF LICENSE
  *
@@ -19,13 +19,13 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * WebShopApps MatrixRate
+ * ShipperHQ Tracker
  *
- * @category WebShopApps
- * @package WebShopApps_MatrixRate
- * @copyright Copyright (c) 2014 Zowta LLC (http://www.WebShopApps.com)
+ * @category ShipperHQ
+ * @package ShipperHQ_Tracker
+ * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @author WebShopApps Team sales@webshopapps.com
+ * @author ShipperHQ Team sales@shipperhq.com
  *
  */
 /**
@@ -41,12 +41,12 @@
                     <![CDATA[
 				<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
 
-          View WebShopApps Generic Tracker <a href="http://wiki.webshopapps.com/extensions/generic-tracker" target="_blank">Documentation</a>
+          View ShipperHQ Generic Tracker <a href="http://wiki.webshopapps.com/extensions/generic-tracker" target="_blank">Documentation</a>
 	  <br/>Download latest <a href="http://www.webshopapps.com/csv/TrackingNumbers.pdf" target="_blank">Tracking URLs</a>
 		  				</div>
 		  			  ]]>
                 </comment>
-                <label>WebShopApps Tracker 1</label>
+                <label>ShipperHQ Tracker 1</label>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Tracking Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -57,7 +57,7 @@
                 <field id="preurl" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Pre-Configured Tracking URL</label>
                     <comment>Select from known Pre-Configured URL's</comment>
-                    <source_model>WebShopApps\Tracker\Model\Config\Source\Preurl</source_model>
+                    <source_model>ShipperHQ\Tracker\Model\Config\Source\Preurl</source_model>
                 </field>
                 <field id="url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Manual Tracking URL</label>
