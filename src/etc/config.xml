@@ -43,6 +43,34 @@
                 <model>ShipperHQ\Tracker\Model\Carrier\Tracker1</model>
                 <title>ShipperHQ Tracker 1</title>
             </shqtracker1>
+            <shqtracker2>
+                <active>0</active>
+                <name>Tracker2</name>
+                <sallowspecific>0</sallowspecific>
+                <model>ShipperHQ\Tracker\Model\Carrier\Tracker2</model>
+                <title>ShipperHQ Tracker 2</title>
+            </shqtracker2>
+            <shqtracker3>
+                <active>0</active>
+                <name>Tracker3</name>
+                <sallowspecific>0</sallowspecific>
+                <model>ShipperHQ\Tracker\Model\Carrier\Tracker3</model>
+                <title>ShipperHQ Tracker 3</title>
+            </shqtracker3>
+            <shqtracker4>
+                <active>0</active>
+                <name>Tracker4</name>
+                <sallowspecific>0</sallowspecific>
+                <model>ShipperHQ\Tracker\Model\Carrier\Tracker4</model>
+                <title>ShipperHQ Tracker 4</title>
+            </shqtracker4>
+            <shqtracker5>
+                <active>0</active>
+                <name>Tracker5</name>
+                <sallowspecific>0</sallowspecific>
+                <model>ShipperHQ\Tracker\Model\Carrier\Tracker5</model>
+                <title>ShipperHQ Tracker 5</title>
+            </shqtracker5>
         </carriers>
         <extension_version>0.0.0</extension_version>
     </default>
