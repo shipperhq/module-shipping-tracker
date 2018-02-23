@@ -43,19 +43,22 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
     /**
      * @var \Magento\Shipping\Model\Rate\ResultFactory
      */
-    protected $_rateResultFactory;
+    protected $rateResultFactory;
 
     /**
      * @var \Magento\Shipping\Model\Tracking\Result\StatusFactory
      */
-    protected $_trackStatusFactory;
+    private $trackStatusFactory;
 
     /**
      * @var \Magento\Shipping\Model\Tracking\ResultFactory
      */
-    protected $_trackFactory;
+    private $trackFactory;
 
-
+    /**
+     * @var \Magento\Framework\DataObjectFactory
+     */
+    private $dataObjectFactory;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -74,15 +77,15 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackStatusFactory,
         \Magento\Shipping\Model\Tracking\ResultFactory $trackFactory,
+        \Magento\Framework\DataObjectFactory $dataObjectFactory,
         array $data = []
     ) {
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
-        $this->_rateResultFactory = $rateResultFactory;
-        $this->_trackStatusFactory = $trackStatusFactory;
-        $this->_trackFactory = $trackFactory;
-
+        $this->rateResultFactory = $rateResultFactory;
+        $this->trackStatusFactory = $trackStatusFactory;
+        $this->trackFactory = $trackFactory;
+        $this->dataObjectFactory = $dataObjectFactory;
     }
-
 
     /**
      * Determins if tracking is set in the admin panel
@@ -94,7 +97,6 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         }
         return true;
     }
-
 
     /**
      * Dummy method - need to make this carrier work.
@@ -109,7 +111,6 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
 
         return false;
     }
-
 
     public function getTrackingInfo($tracking, $postcode = null)
     {
@@ -131,7 +132,7 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         $this->setTrackingReqeust();
 
         if (!is_array($trackings)) {
-            $trackings = array($trackings);
+            $trackings = [$trackings];
         }
         $this->_getCgiTracking($trackings, $postcode);
 
@@ -140,7 +141,7 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
 
     protected function setTrackingReqeust()
     {
-        $r = new \Magento\Framework\DataObject();
+        $r = $this->dataObjectFactory->create();
 
         $userId = $this->getConfigData('userid');
         $r->setUserId($userId);
@@ -152,13 +153,11 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
     protected function _getCgiTracking($trackings, $postcode = null)
     {
 
-        $this->_result = $this->_trackFactory->create();
-
-        //try
+        $this->_result = $this->trackFactory->create();
 
         $defaults = $this->getDefaults();
         foreach ($trackings as $tracking) {
-            $status = $this->_trackStatusFactory->create();
+            $status = $this->trackStatusFactory->create();
 
             $status->setCarrier('Tracker');
             $status->setCarrierTitle($this->getConfigData('title'));
@@ -171,27 +170,25 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
             } else {
                 $taggedUrl = $manualUrl;
             }
-            if (strpos($taggedUrl, '#SPECIAL#')) {
+            if (strpos($taggedUrl, '#SPECIAL#')!== false) {
                 $taggedUrl = str_replace("#SPECIAL#", "", $taggedUrl);
                 $fullUrl = str_replace("#TRACKNUM#", "", $taggedUrl);
             } else {
                 $fullUrl = str_replace("#TRACKNUM#", $tracking, $taggedUrl);
-                if ($postcode && strpos($taggedUrl, '#POSTCODE#')) {
+                if ($postcode && strpos($taggedUrl, '#POSTCODE#')!== false) {
                     $fullUrl = str_replace("#POSTCODE#", $postcode, $fullUrl);
                 }
             }
             $status->setUrl($fullUrl);
-            //  $status->setUrl("http://www.parcelforce.com/portal/pw/track?trackNumber=$tracking");
             $this->_result->append($status);
         }
     }
 
-
     public function getCode($type, $code = '')
     {
-        $codes = array(
+        $codes = [
 
-            'preurl' => array(
+            'preurl' => [
                 'none' => __('Use Manual Url'),
                 'ddt' => __('DDT (Italy)'),
                 'post_danmark' => __('Post Danmark (Denmark)'),
@@ -209,9 +206,9 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
                 'uk_mail' => __('UK Mail (UK)'),
                 'tnt_uk' => __('TNT (UK)'),
                 'usps_usa' => __('USPS (USA)'),
-            ),
+            ],
 
-            'tracking_url' => array(
+            'tracking_url' => [
                 'ddt' => 'http://www.DDT.com/portal/pw/track?trackNumber=#TRACKNUM#',
                 'post_danmark' => 'http://www.postdanmark.dk/tracktrace/TrackTrace.do?i_stregkode=#TRACKNUM#&i;_lang=IND',
                 'tnt' => 'https://securepostplaza.tntpost.nl/TPGApps/tracktrace/findByBarcodeServlet?BARCODE=#TRACKNUM#&ZIPCODE=#POSTCODE#',
@@ -228,12 +225,14 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
                 'uk_mail' => 'http://www.business-post.com/scripts/wsisa.dll/ws_quickpod.html?lc_SearchValue=#TRACKNUM#',
                 'tnt_uk' => 'http://www.kiosk.tnt.com/webshipper/doTrack.asp?C=#TRACKNUM#&L=EN',
                 'usps_usa' => 'https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1=#TRACKNUM#',
-            ),
+            ],
 
-        );
+        ];
 
         if (!isset($codes[$type])) {
-            throw new LocalizedException(__('Invalid Tracking code type: %1.', $type));
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Invalid Tracking code type: %1.', $type)
+            );
         }
 
         if ('' === $code) {
@@ -241,11 +240,11 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         }
 
         if (!isset($codes[$type][$code])) {
-            throw new LocalizedException(__('Invalid Tracking code for type %1: %2.', $type, $code));
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Invalid Tracking code for type %1: %2.', $type, $code)
+            );
         }
 
         return $codes[$type][$code];
     }
-
 }
-    

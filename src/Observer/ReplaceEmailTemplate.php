@@ -37,7 +37,6 @@ namespace ShipperHQ\Tracker\Observer;
 use Magento\Framework\Event\Observer as EventObserver;
 use Magento\Framework\Event\ObserverInterface;
 
-
 /**
  * Tracker observer to replace the email template
  */
@@ -46,7 +45,7 @@ class ReplaceEmailTemplate implements ObserverInterface
     /**
      * @var \ShipperHQ\Tracker\Helper\Data
      */
-    protected $_trackerDataHelper;
+    private $trackerDataHelper;
 
     /**
      * ReplaceEmailTemplate constructor.
@@ -54,9 +53,9 @@ class ReplaceEmailTemplate implements ObserverInterface
      */
     public function __construct(
         \ShipperHQ\Tracker\Helper\Data $shipperDataHelper
-    )
-    {
-        $this->_trackerDataHelper = $shipperDataHelper;
+    ) {
+    
+        $this->trackerDataHelper = $shipperDataHelper;
     }
     /**
      * Record order shipping information after order is placed
@@ -66,14 +65,11 @@ class ReplaceEmailTemplate implements ObserverInterface
      */
     public function execute(EventObserver $observer)
     {
-        if ($this->_trackerDataHelper->getConfigValue('carriers/tracker1/active')) {
-
+        if ($this->trackerDataHelper->getConfigValue('carriers/shqtracker1/active')) {
             $blockentity = $observer->getBlock();
             if ($blockentity->getTemplate() == 'Magento_Sales::email/shipment/track.phtml') {
                 $blockentity->setTemplate('ShipperHQ_Tracker::email/shipment/track.phtml');
             }
         }
     }
-
 }
-
