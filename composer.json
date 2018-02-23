@@ -1,0 +1,38 @@
+{
+    "name": "shipperhq/module-shipping-tracker",
+
+    "description": "Shipping Tracker - By the ShipperHQ Team",
+
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+
+    "version": "1.0.0",
+
+    "authors": [
+        {
+            "name": "ShipperHQ",
+            "email": "sales@wshipperhq.com",
+            "homepage": "http://www.Shipperhq.com"
+        },
+        {
+            "name": "Karen Baker"
+        }
+    ],
+
+    "type": "magento2-module",
+
+    "support": {
+        "documentation": "http://docs.shipperhq.com"
+    },
+
+    "autoload": {
+        "files": [
+            "src/registration.php"
+        ],
+        "psr-4": {
+            "ShipperHQ\\Tracker\\": "src/"
+        }
+    }
+}

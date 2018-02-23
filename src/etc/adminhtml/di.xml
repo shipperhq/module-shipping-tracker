@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Shipping\Model\Order\Track">
+        <plugin name="ShipperHQ_Tracker" type="ShipperHQ\Tracker\Plugin\Order\Shipment\TrackPlugin" />
+    </type>
+</config>
