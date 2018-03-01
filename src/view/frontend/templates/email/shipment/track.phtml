@@ -3,36 +3,35 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
+use ShipperHQ\Tracker\Helper\Track;
 // @codingStandardsIgnoreFile
-
-?>
-<?php $_shipment = $block->getShipment() ?>
-<?php $_order = $block->getOrder() ?>
-<?php
-$rplChars = array(" " => '');
-$string = "";
+$_shipment = $block->getShipment();
+$_order = $block->getOrder();
+$rplChars = array(' ' => '');
+$string = '';
 if ($this->getOrder()) {
     $string = $this->getOrder()->getShippingAddress()->getPostcode();
 }
-$zipcode = strtr($string,$rplChars);?>
+$zipCode = strtr($string, $rplChars);
+?>
 <?php if ($_shipment && $_order && $_shipment->getAllTracks()): ?>
-    <br />
+    <br/>
     <table class="shipment-track">
         <thead>
         <tr>
-            <th><?= /* @escapeNotVerified */  __('Shipped1 By') ?></th>
-            <th><?= /* @escapeNotVerified */  __('Tracking1 Number') ?></th>
+            <th><?= /* @escapeNotVerified */ __('Shipped By') ?></th>
+            <th><?= /* @escapeNotVerified */ __('Tracking Number') ?></th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($_shipment->getAllTracks() as $_item): ?>
             <tr>
                 <td><?= $block->escapeHtml($_item->getTitle()) ?>:</td>
-                <?php $_url=$this->helper('ShipperHQ\Tracker\Helper\Track')->getTrackUrl($_item->getTitle(),$_item->getNumber(), $zipcode) ?>
+                <?php $_url = $this->helper(Track::class)->getTrackUrl($_item->getTitle(),
+                    $_item->getNumber(), $zipCode) ?>
 
-                <?php if ($_url!=""): ?>
-                    <td><a href="<?php echo $_url ?>" ><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
+                <?php if ($_url !== ''): ?>
+                    <td><a href="<?php echo $_url ?>"><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
                 <?php else: ?>
                     <td><?= $block->escapeHtml($_item->getNumber()) ?></td>
                 <?php endif; ?>
