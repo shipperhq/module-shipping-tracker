@@ -9,3 +9,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.1] - 2018-03-01
 ### Added
 - M2-59 update to tracking email template
+
+## [1.0.2] - 2019-03-19
+### Added
+- SHQ18-1678 Update links to point to new support documentation
+
+## [1.0.3] - 2019-05-28
+### Added
+- SHQ18-1992 Fix for tracking links from wrong order showing in email template
