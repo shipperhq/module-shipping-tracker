@@ -1,4 +1,7 @@
 # Change Log
+
+## [v1.0.5](https://github.com/shipperhq/module-shipping-tracker/tree/v1.0.5) (2022-06-20)
+[Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.0.4...develop)
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
