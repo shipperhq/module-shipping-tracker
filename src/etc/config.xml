@@ -72,6 +72,6 @@
                 <title>ShipperHQ Tracker 5</title>
             </shqtracker5>
         </carriers>
-        <extension_version>0.0.0</extension_version>
+        <extension_version>v1.0.5</extension_version>
     </default>
 </config>
