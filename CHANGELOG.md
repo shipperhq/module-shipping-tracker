@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.0.6](https://github.com/shipperhq/module-shipping-tracker/tree/v1.0.6) (2023-06-16)
+[Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.0.5...develop)
+ - [MNB-3339](https://webshopapps.atlassian.net/browse/MNB-3339) Correction to phrasing in README [\#14](https://github.com/shipperhq/module-shipping-tracker/-/merge_requests/14) ([wsajason](https://gitlab.com/wsajason))
+
 ## [v1.0.5](https://github.com/shipperhq/module-shipping-tracker/tree/v1.0.5) (2022-06-20)
 [Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.0.4...develop)
 
