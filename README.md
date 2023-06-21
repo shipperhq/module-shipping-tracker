@@ -1,20 +1,19 @@
 # ShipperHQ Shipping Tracker
 
-Description
------------
-
-Generic tracking extension allowing you to enter your own urls
-
 Facts
 -----
 - [extension on GitHub](https://github.com/shipperhq/module-shipping-tracker)
-- Magento v1.0 available for download from www.webshopapps.com
 
+Description
+-----------
+
+A simple extension which allows you to enter custom shipment tracking URLs. This will enable your customers to have a clickable shipping tracking link in the new shipment email and when viewing their order in Magento.
 
 Compatibility
 -------------
 This module supports and is tested against the following Magento versions:
 
+* 2.4.6
 * 2.4.5-p1
 * 2.4.5
 * 2.4.4-p2
@@ -31,7 +30,7 @@ per the [official Magento 2 requirements](https://experienceleague.adobe.com/doc
 
 Supports both Magento Opensource (Community) and Magento Commerce (Enterprise)
 
-Compatibility with earlier editions is possible but not maintained.
+Compatibility with earlier editions is possible but is not maintained.
 
 Installation Instructions
 -------------------------
@@ -45,8 +44,13 @@ For up-to-date installation instructions, along with troubleshooting steps, plea
 
 Support
 -------
-For further information on using Tracker, please refer to our [online documentation](http://support.webshopapps.com/shippingtracker).
 If you have any issues with this extension, open an issue on [GitHub](https://github.com/shipperhq/module-shipping-tracker/issues).
+
+Configuration
+-------------
+The shipping tracker configuration can be found in the shipping methods section: Stores > Configuration > Sales > Shipping Methods > ShipperHQ Tracker 1...5
+
+For further information on using Shipping Tracker, please refer to our [online documentation](http://support.webshopapps.com/shippingtracker)
 
 Contribution
 ------------
