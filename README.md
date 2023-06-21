@@ -42,15 +42,15 @@ Install using composer by adding to your composer file using commands:
 
 For up-to-date installation instructions, along with troubleshooting steps, please see the documentation, below.
 
-Support
--------
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/shipperhq/module-shipping-tracker/issues).
-
 Configuration
 -------------
 The shipping tracker configuration can be found in the shipping methods section: Stores > Configuration > Sales > Shipping Methods > ShipperHQ Tracker 1...5
 
 For further information on using Shipping Tracker, please refer to our [online documentation](http://support.webshopapps.com/shippingtracker)
+
+Support
+-------
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/shipperhq/module-shipping-tracker/issues).
 
 Contribution
 ------------
