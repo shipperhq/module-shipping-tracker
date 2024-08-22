@@ -27,3 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3] - 2019-05-28
 ### Added
 - SHQ18-1992 Fix for tracking links from wrong order showing in email template
+
+## [1.0.3] - 2020-11-13
+### Added
+- ISSUE-12 Updated version numbers to allow composer update
