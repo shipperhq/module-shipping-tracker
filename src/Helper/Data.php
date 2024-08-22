@@ -34,15 +34,14 @@
 
 namespace ShipperHQ\Tracker\Helper;
 
-use Magento\Store\Model\Store;
-use Magento\Store\Model\StoreManagerInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Tracker data helper
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    
+
     /**
      * Get Config Value
      *
@@ -53,7 +52,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             $configField,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE
         );
     }
 }
