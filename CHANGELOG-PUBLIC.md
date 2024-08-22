@@ -10,3 +10,7 @@ New release for marketplace
 Magento 2.4.6 Update
 
 
+## v1.1.0 (2024-08-22)
+SHQ23-3353 Update extn for marketplace
+
+
