@@ -14,3 +14,7 @@ Magento 2.4.6 Update
 SHQ23-3353 Update extn for marketplace
 
 
+## v1.1.1 (2024-11-15)
+SHQ23-296 Updated tracking links
+
+

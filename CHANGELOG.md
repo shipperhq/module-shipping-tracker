@@ -1,5 +1,8 @@
 # Change Log
 
+## [v1.1.1](https://github.com/shipperhq/module-shipping-tracker/tree/v1.1.1) (2024-11-15)
+[Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.1.0...develop)
+
 ## [v1.1.0](https://github.com/shipperhq/module-shipping-tracker/tree/v1.1.0) (2024-08-22)
 [Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.0.6...develop)
 
