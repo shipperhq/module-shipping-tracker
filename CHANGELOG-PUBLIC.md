@@ -18,3 +18,7 @@ SHQ23-3353 Update extn for marketplace
 SHQ23-296 Updated tracking links
 
 
+## v1.2.0 (2025-08-22)
+updated composer.json version
+
+
