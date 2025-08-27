@@ -19,6 +19,10 @@ SHQ23-296 Updated tracking links
 
 
 ## v1.2.0 (2025-08-22)
-updated composer.json version
+INFRA-833 Pipeline redux
+
+
+## v1.2.1 (2025-08-22)
+SHQ23-5374 Fix CI file
 
 

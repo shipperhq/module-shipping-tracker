@@ -21,29 +21,28 @@
  * ShipperHQ Tracker
  *
  * @category ShipperHQ
- * @package ShipperHQ_Tracker
+ * @package ShipperHQ\Tracker
  * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @author ShipperHQ Team sales@shipperhq.com
  *
  */
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace ShipperHQ\Tracker\Model\Config\Source;
+
+use ShipperHQ\Tracker\Model\Carrier\Tracker1;
 
 class Preurl implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \ShipperHQ\Tracker\Model\Carrier\Tracker1
+     * @var Tracker1
      */
     private $carrierTracker;
 
     /**
-     * @param \ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1
+     * @param Tracker1 $carrierTracker1
      */
-    public function __construct(\ShipperHQ\Tracker\Model\Carrier\Tracker1 $carrierTracker1)
+    public function __construct(Tracker1 $carrierTracker1)
     {
         $this->carrierTracker = $carrierTracker1;
     }

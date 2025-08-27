@@ -21,26 +21,19 @@
  * ShipperHQ Tracker
  *
  * @category ShipperHQ
- * @package ShipperHQ_Tracker
+ * @package ShipperHQ\Tracker
  * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @author ShipperHQ Team sales@shipperhq.com
  *
  */
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-
 
 namespace ShipperHQ\Tracker\Plugin\Order\Shipment;
 
 class TrackPlugin
 {
-
     public function afterGetNumberDetail(\Magento\Shipping\Model\Order\Track $trackObj, $result)
     {
-
         // check its the tracker carrier
         if (strpos($this->getCarrierCode(), 'tracker')!== false &&
             strpos($result, 'No detail for number') !== false) {
@@ -58,7 +51,7 @@ class TrackPlugin
             $rplChars = [" " => ''];
             $string = $this->getShipment()->getShippingAddress()->getPostcode();
             $postcode = strtr($string, $rplChars);
-            
+
             $trackingInfo = $carrierInstance->getTrackingInfo($this->getNumber(), $postcode);
             if (!$trackingInfo) {
                 return __('No detail for number "%s"', $this->getNumber());
@@ -66,6 +59,7 @@ class TrackPlugin
 
             return $trackingInfo;
         }
+
         return $result;
     }
 }

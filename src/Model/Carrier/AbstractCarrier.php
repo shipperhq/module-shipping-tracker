@@ -22,31 +22,34 @@
  * ShipperHQ Tracker
  *
  * @category ShipperHQ
- * @package ShipperHQ_Tracker
+ * @package ShipperHQ\Tracker
  * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @author ShipperHQ Team sales@shipperhq.com
  *
  */
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 namespace ShipperHQ\Tracker\Model\Carrier;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
+use Magento\Shipping\Model\Rate\ResultFactory;
+use Magento\Shipping\Model\Tracking\Result;
+use Magento\Shipping\Model\Tracking\Result\StatusFactory;
+use Psr\Log\LoggerInterface;
 
 class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
 {
-
     /**
-     * @var \Magento\Shipping\Model\Rate\ResultFactory
+     * @var ResultFactory
      */
     protected $rateResultFactory;
 
     /**
-     * @var \Magento\Shipping\Model\Tracking\Result\StatusFactory
+     * @var StatusFactory
      */
     private $trackStatusFactory;
 
@@ -56,28 +59,29 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
     private $trackFactory;
 
     /**
-     * @var \Magento\Framework\DataObjectFactory
+     * @var DataObjectFactory
      */
     private $dataObjectFactory;
 
     /**
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
-     * @param \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackStatusFactory
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ErrorFactory $rateErrorFactory
+     * @param LoggerInterface $logger
+     * @param ResultFactory $rateResultFactory
+     * @param StatusFactory $trackStatusFactory
      * @param \Magento\Shipping\Model\Tracking\ResultFactory $trackFactory
+     * @param DataObjectFactory $dataObjectFactory
      * @param array $data
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
-        \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackStatusFactory,
+        ScopeConfigInterface $scopeConfig,
+        ErrorFactory $rateErrorFactory,
+        LoggerInterface $logger,
+        ResultFactory $rateResultFactory,
+        StatusFactory $trackStatusFactory,
         \Magento\Shipping\Model\Tracking\ResultFactory $trackFactory,
-        \Magento\Framework\DataObjectFactory $dataObjectFactory,
+        DataObjectFactory $dataObjectFactory,
         array $data = []
     ) {
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
@@ -88,13 +92,14 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
     }
 
     /**
-     * Determins if tracking is set in the admin panel
+     * Determines if tracking is set in the admin panel
      **/
     public function isTrackingAvailable()
     {
         if (!$this->getConfigFlag('active')) {
             return false;
         }
+
         return true;
     }
 
@@ -108,15 +113,20 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
      */
     public function collectRates(RateRequest $request)
     {
-
         return false;
     }
 
+    /**
+     * @param $tracking
+     * @param $postcode
+     * @return false|mixed|string
+     * @throws LocalizedException
+     */
     public function getTrackingInfo($tracking, $postcode = null)
     {
         $result = $this->getTracking($tracking, $postcode);
 
-        if ($result instanceof \Magento\Shipping\Model\Tracking\Result) {
+        if ($result instanceof Result) {
             if ($trackings = $result->getAllTrackings()) {
                 return $trackings[0];
             }
@@ -127,6 +137,12 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         return false;
     }
 
+    /**
+     * @param $trackings
+     * @param $postcode
+     * @return \Magento\Shipping\Model\Rate\Result|null
+     * @throws LocalizedException
+     */
     public function getTracking($trackings, $postcode = null)
     {
         $this->setTrackingReqeust();
@@ -139,6 +155,9 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         return $this->_result;
     }
 
+    /**
+     * @return void
+     */
     protected function setTrackingReqeust()
     {
         $r = $this->dataObjectFactory->create();
@@ -149,10 +168,16 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         $this->_rawTrackRequest = $r;
     }
 
-    /** Popup window to tracker **/
+    /**
+     * Popup window to tracker
+     *
+     * @param $trackings
+     * @param $postcode
+     * @return void
+     * @throws LocalizedException
+     */
     protected function _getCgiTracking($trackings, $postcode = null)
     {
-
         $this->_result = $this->trackFactory->create();
 
         $defaults = $this->getDefaults();
@@ -184,53 +209,56 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         }
     }
 
+    /**
+     * Gets the code and naming
+     *
+     * @param $type
+     * @param $code
+     * @return mixed
+     * @throws LocalizedException
+     */
     public function getCode($type, $code = '')
     {
         $codes = [
 
             'preurl' => [
                 'none' => __('Use Manual Url'),
-                'ddt' => __('DDT (Italy)'),
-                'post_danmark' => __('PostNord (Denmark)'), // Updated to reflect Post Denmark's rebranding to PostNord
-                'tnt' => __('TNT (Global)'), // Updated to indicate global coverage via the main TNT tracking site
+                'post_danmark' => __('PostNord (Denmark)'),
+                'tnt' => __('TNT (now FedEx)'),
                 'dhl_de' => __('DHL (Germany)'),
                 'dpd_de' => __('DPD (Germany)'),
                 'gls' => __('GLS (Germany)'),
-                'apc' => __('APC Overnight (UK)'), // Clarified that it's APC Overnight
+                'apc' => __('APC Overnight (UK)'),
                 'dpd_uk' => __('DPD (UK)'),
-                'dhl_uk' => __('DHL (UK)'),
-                'fedex' => __('FedEx (Global)'), // Adjusted to reflect broader coverage
+                'dhl_uk' => __('DHL Express (UK)'),
+                'fedex' => __('FedEx (Global)'),
                 'fedex_us' => __('FedEx (USA)'),
-                'parcelforce' => __('Parcelforce (UK)'),
+                'parcelforce' => __('Parcelforce Worldwide (UK)'),
                 'royal_mail' => __('Royal Mail (UK)'),
-                'uk_mail' => __('DHL Parcel UK'), // Updated to reflect UK Mail's acquisition by DHL
-                'tnt_uk' => __('TNT (UK)'),
+                'uk_mail' => __('DHL eCommerce UK'), // formerly DHL Parcel UK / UK Mail
                 'usps_usa' => __('USPS (USA)'),
             ],
 
             'tracking_url' => [
-                'ddt' => 'http://www.DDT.com/portal/pw/track?trackNumber=#TRACKNUM#',
-                'post_danmark' => 'https://www.postnord.dk/en/track-and-trace?shipmentid=#TRACKNUM#',
+                'post_danmark' => 'https://portal.postnord.com/tracking/details/#TRACKNUM#',
                 'tnt' => 'https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons=#TRACKNUM#',
-                'dpd_de' => 'https://tracking.dpd.de/status/en_US/parcel/#TRACKNUM#',
-                'dhl_de' => 'https://www.dhl.de/en/privatkunden.html?piececode=#TRACKNUM#',
-                'gls' => 'https://gls-group.com/DE/en/parcel-tracking?match=#TRACKNUM#',
+                'dpd_de' => 'https://tracking.dpd.de/status/en_GB/parcel/#TRACKNUM#',
+                'dhl_de' => 'https://www.dhl.de/track?piececode=#TRACKNUM#',
+                'gls' => 'https://gls-group.com/EU/en/parcel-tracking?match=#TRACKNUM#',
                 'apc' => 'https://apc-overnight.com/receiving-a-parcel/tracking?ref=#TRACKNUM#',
-                'dpd_uk' => 'https://www.dpd.co.uk/tracking?parcelNumber=#TRACKNUM#',
+                'dpd_uk' => 'https://track.dpd.co.uk/search?reference=#TRACKNUM#',
                 'dhl_uk' => 'https://www.dhl.com/gb-en/home/tracking.html?tracking-id=#TRACKNUM#',
                 'fedex' => 'https://www.fedex.com/apps/fedextrack/?tracknumbers=#TRACKNUM#',
                 'fedex_us' => 'https://www.fedex.com/apps/fedextrack/?tracknumbers=#TRACKNUM#',
                 'parcelforce' => 'https://www.parcelforce.com/track-trace?trackNumber=#TRACKNUM#',
-                'royal_mail' => 'https://www.royalmail.com/track-your-item?trackNumber=#TRACKNUM#',
-                'uk_mail' => 'https://www.dhlparcel.co.uk/en/business-users/tracking.html?tracking-id=#TRACKNUM#',
-                'tnt_uk' => 'https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons=#TRACKNUM#',
-                'usps_usa' => 'https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1=#TRACKNUM#',
-            ],
-
+                'royal_mail' => 'https://www.royalmail.com/track-your-item#/tracking-results/#TRACKNUM#',
+                'uk_mail' => 'https://track.dhlparcel.co.uk/?con=#TRACKNUM#',
+                'usps_usa' => 'https://tools.usps.com/go/TrackConfirmAction?tLabels=#TRACKNUM#',
+            ]
         ];
 
         if (!isset($codes[$type])) {
-            throw new \Magento\Framework\Exception\LocalizedException(
+            throw new LocalizedException(
                 __('Invalid Tracking code type: %1.', $type)
             );
         }
@@ -240,7 +268,7 @@ class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
         }
 
         if (!isset($codes[$type][$code])) {
-            throw new \Magento\Framework\Exception\LocalizedException(
+            throw new LocalizedException(
                 __('Invalid Tracking code for type %1: %2.', $type, $code)
             );
         }
