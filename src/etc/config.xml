@@ -22,16 +22,13 @@
  * ShipperHQ Tracker
  *
  * @category ShipperHQ
- * @package ShipperHQ_Tracker
+ * @package ShipperHQ\Tracker
  * @copyright Copyright (c) 2016 Zowta LLC (http://www.ShipperHQ.com)
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @author ShipperHQ Team sales@shipperhq.com
  *
  */
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
@@ -72,6 +69,6 @@
                 <title>ShipperHQ Tracker 5</title>
             </shqtracker5>
         </carriers>
-        <extension_version>v1.2.0</extension_version>
+        <extension_version>v1.2.1</extension_version>
     </default>
 </config>
