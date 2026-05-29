@@ -26,3 +26,7 @@ INFRA-833 Pipeline redux
 SHQ23-5374 Fix CI file
 
 
+## v1.1.2 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
