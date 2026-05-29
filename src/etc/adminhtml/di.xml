@@ -1,3 +1,12 @@
+<!--
+  ~ ShipperHQ
+  ~
+  ~ @category ShipperHQ
+  ~ @package ShipperHQ\Tracker
+  ~ @copyright Copyright (c) 2016 Zowta LTD and Zowta LLC (http://www.ShipperHQ.com)
+  ~ @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  ~ @author ShipperHQ Team sales@shipperhq.com
+  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="\Magento\Shipping\Model\Order\Track">
         <plugin name="ShipperHQ_Tracker" type="ShipperHQ\Tracker\Plugin\Order\Shipment\TrackPlugin" />
