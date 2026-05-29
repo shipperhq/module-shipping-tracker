@@ -34,3 +34,7 @@ ENG26-26 Modernise copyrights and documentation
 updated composer.json version
 
 
+## v1.1.4 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
