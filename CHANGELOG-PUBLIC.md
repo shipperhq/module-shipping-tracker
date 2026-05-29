@@ -30,3 +30,7 @@ SHQ23-5374 Fix CI file
 ENG26-26 Modernise copyrights and documentation
 
 
+## v1.1.3 (2026-05-29)
+updated composer.json version
+
+
