@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.2.1](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/tree/v1.2.1) (2025-08-22)
+[Full Changelog](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/-/compare/v1.2.0...develop)
+
+## [v1.2.0](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/tree/v1.2.0) (2025-08-22)
+[Full Changelog](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/-/compare/v1.1.1...develop)
+ - [INFRA-833](https://webshopapps.atlassian.net/browse/INFRA-833) Pipeline redux [\#26](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/-/merge_requests/26) ([wsajason](https://gitlab.com/wsajason))
+ - [SHQ23-5374](https://webshopapps.atlassian.net/browse/SHQ23-5374) Fixing copyrights and updating links [\#25](https://gitlab.com/ShipperHQ/Platform/M2/module-shipping-tracker/-/merge_requests/25) ([wsajosh](https://gitlab.com/wsajosh))
+
 ## [v1.1.1](https://github.com/shipperhq/module-shipping-tracker/tree/v1.1.1) (2024-11-15)
 [Full Changelog](https://github.com/shipperhq/module-shipping-tracker/-/compare/v1.1.0...develop)
 

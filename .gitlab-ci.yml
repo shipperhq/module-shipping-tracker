@@ -1,0 +1,81 @@
+include:
+  - project: ShipperHQ/DevOps/GitLabTemplates
+    ref: main
+    file: /magento/release.gitlab-ci.yml
+
+stages:
+  - tag
+  - release to GitLab
+  - release to GitHub
+  - merge to main
+  - merge to production
+
+# Denote whether to build major, minor or patch release
+major release:
+  stage: tag
+  variables:
+    VERSION_INCREMENT: "major"
+    ON_MARKETPLACE: true
+  extends:
+    - .m2_module_release
+
+minor release:
+  stage: tag
+  variables:
+    VERSION_INCREMENT: "minor"
+    ON_MARKETPLACE: true
+  extends:
+    - .m2_module_release
+
+patch release:
+  stage: tag
+  variables:
+    VERSION_INCREMENT: "patch"
+    ON_MARKETPLACE: true
+  extends:
+    - .m2_module_release
+    
+# Build public release
+build release to GitHub:
+  stage: release to GitHub
+  variables:
+    GITHUB_REPO: "git@github.com:shipperhq/module-shipping-tracker.git"
+  when: on_success
+  needs:
+    - job: major release
+      optional: true
+    - job: minor release
+      optional: true
+    - job: patch release
+      optional: true
+  extends:
+    - .m2_public_only_release
+
+# Merge to main
+merge to main branch:
+  stage: merge to main
+  when: on_success
+  needs:
+    - job: major release
+      optional: true
+    - job: minor release
+      optional: true
+    - job: patch release
+      optional: true
+  extends:
+  - .merge_to_main
+
+# Merge to production
+merge to production branch:
+  stage: merge to production
+  when: on_success
+  needs:
+    - job: merge to main branch
+  extends:
+    - .merge_to_prod
+
+build mp release to GitLab:
+  stage: release to GitLab
+  when: on_success
+  extends:
+    - .m2_marketplace_release

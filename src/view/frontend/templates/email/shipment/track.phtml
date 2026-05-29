@@ -1,8 +1,14 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * ShipperHQ
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ\Tracker
+ * @copyright Copyright (c) 2016 Zowta LTD and Zowta LLC (http://www.ShipperHQ.com)
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @author ShipperHQ Team sales@shipperhq.com
  */
+
 use ShipperHQ\Tracker\Helper\Track;
 // @codingStandardsIgnoreFile
 $_shipment = $block->getShipment();
@@ -31,7 +37,7 @@ $zipCode = strtr($string, $rplChars);
                     $_item->getNumber(), $zipCode) ?>
 
                 <?php if ($_url !== ''): ?>
-                    <td><a href="<?php echo $_url ?>"><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
+                    <td><a href="<?= $block->escapeUrl($_url) ?>"><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
                 <?php else: ?>
                     <td><?= $block->escapeHtml($_item->getNumber()) ?></td>
                 <?php endif; ?>
