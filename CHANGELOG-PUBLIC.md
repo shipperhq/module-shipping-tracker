@@ -50,3 +50,7 @@ ENG26-26 Modernise copyrights and documentation
 ENG26-1897 Bringing all versions in line with each other
 
 
+## 1.3.1 (2026-09-18)
+ENG26-1897 Brought all tags in line
+
+
