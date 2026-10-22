@@ -13,6 +13,7 @@
         <section id="carriers">
             <group id="shqtracker1" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>ShipperHQ Tracker 1</label>
+                <frontend_model>ShipperHQ\Tracker\Block\Adminhtml\System\Config\Fieldset\Upsell</frontend_model>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Tracking Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

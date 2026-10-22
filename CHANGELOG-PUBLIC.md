@@ -26,3 +26,31 @@ INFRA-833 Pipeline redux
 SHQ23-5374 Fix CI file
 
 
+## v1.1.2 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
+## v1.1.3 (2026-05-29)
+updated composer.json version
+
+
+## v1.1.4 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
+## v1.1.5 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
+## v1.1.6 (2026-05-29)
+ENG26-26 Modernise copyrights and documentation
+
+
+## 1.3.1 (2026-09-18)
+ENG26-1897 Bringing all versions in line with each other
+
+
+## 1.3.1 (2026-09-18)
+ENG26-1897 Brought all tags in line
+
+
