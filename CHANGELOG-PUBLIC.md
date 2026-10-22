@@ -58,3 +58,7 @@ ENG26-1897 Brought all tags in line
 updated composer.json version
 
 
+## 1.3.3 (2026-10-22)
+Incremented version
+
+
