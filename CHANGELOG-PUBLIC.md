@@ -54,3 +54,7 @@ ENG26-1897 Bringing all versions in line with each other
 ENG26-1897 Brought all tags in line
 
 
+## 1.3.2 (2026-10-22)
+updated composer.json version
+
+
