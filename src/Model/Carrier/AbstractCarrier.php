@@ -25,6 +25,11 @@ use Psr\Log\LoggerInterface;
 class AbstractCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrier
 {
     /**
+     * @var \Magento\Framework\DataObject
+     */
+    protected $_rawTrackRequest;
+
+    /**
      * @var ResultFactory
      */
     protected $rateResultFactory;
